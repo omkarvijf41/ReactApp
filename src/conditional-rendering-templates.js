@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import ReactDOM from 'react-dom';
 
 var ConditionalRenderingTemplates = React.createClass({
@@ -46,6 +46,7 @@ var ConditionalRenderingTemplates = React.createClass({
 	    );
 	  }
 });
+
 // function LoginButton(props) {
 // 	  return (
 // 	    <button onClick={props.onClick}>
@@ -75,4 +76,4 @@ var ConditionalRenderingTemplates = React.createClass({
 //   document.getElementById('root')
 // );
 ReactDOM.render(<ConditionalRenderingTemplates/>, 
-document.getElementById('conditionalRenderingTemplates'));
+document.getElementById('conditionalRenderingTemplates'));*/
