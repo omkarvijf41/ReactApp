@@ -10,7 +10,7 @@ function ReactState()  {
 	);
 }
  
-ReactDOM.render(<ReactState/>, document.getElementById('reactState'));
+ReactDOM.render(<ReactState/>, document.getElementById('reactState'));/*created component, id*/
 
 setInterval(ReactState, 1000);
 
