@@ -19,7 +19,7 @@ class ReactForms extends React.Component {
 		/*How can I make an AJAX call?
 		You can use any AJAX library you like with React. Some popular ones are Axios, jQuery AJAX, 
 		and the browser built-in window.fetch.*/
-		this.data = this.serviceData();
+		//this.data = this.serviceData();
 	}
 	async serviceData() {
 		/*Fetch service call*/
@@ -52,7 +52,8 @@ class ReactForms extends React.Component {
 		});
 	}
 	postFromData(event) {
-		/*fetch('http://localhost:8080/stubs/userData', {
+		event.preventDefault();
+		fetch('https://randomuser.me/api/', {
 		  method: 'POST',
 		  headers: {
 		    'Accept': 'application/json',
@@ -63,8 +64,8 @@ class ReactForms extends React.Component {
 		    secondParam: 'yourOtherValue',
 		  })
 		});
-		*/
-		/*axios.post('http://localhost:8080/stubs/userData', {
+		
+		/*axios.post('https://randomuser.me/api/', {
 		    firstName: 'Fred',
 		    lastName: 'Flintstone'
 		  })
@@ -80,34 +81,43 @@ class ReactForms extends React.Component {
    }
 	render() {
 		return (
-			<form onSubmit={this.postFromData}>
-				<label>UserName:
-					<input type="text" 
-						value={this.state.userName} 
-						onChange={this.userNameUpdated}
-						ref={(input) => { this.inputFocus = input; }}
-						/*document.getElementById() or targeting element using Jquery is 
-						avioded by using ref attribute*/
-						color //color defaultProp is undefined so it will set to true
-					/> 
-				</label>
-				<input 
-					type="submit" 
-					onClick={this.handleInputRef}
-					color="yellow" /*overriding the defaultProps.color here*/
-				/>
-				<button 
-					onClick={this.buttonClicked}
-					value={this.state.count}>
-					CountIncrement:{this.state.count}
-				</button>
-			</form>
+			<div>
+				<form onSubmit={this.postFromData}>
+					<label>UserName:
+						<input type="text" 
+							value={this.state.userName} 
+							onChange={this.userNameUpdated}
+							ref={(input) => { this.inputFocus = input; }}
+							/*document.getElementById() or targeting element using Jquery is 
+							avioded by using ref attribute*/
+							color //color defaultProp is undefined so it will set to true
+						/> 
+					</label>
+					<input 
+						type="submit" 
+						onClick={this.handleInputRef}
+						color="yellow" //overriding the defaultProps.color here//
+					/>
+					<button 
+						onClick={this.buttonClicked}
+						value={this.state.count}>
+						CountIncrement:{this.state.count}
+					</button>
+				</form>
+			</div>
+			// Adjacent JSX elements must be wrapped in an enclosing tag or we can't return two adjucent elements 
+			// simentansouly so they should be enclosed in parent tag before returning.
+			// return React.createElement(// this is how react return elements.
+			//           'button',
+			//           null,
+			//           'showReactAlert:'  
+			//         )
 		);
 	}
 } 
 ReactDOM.render(<ReactForms color='red' name="ReactFormsNameSetting"/>, document.getElementById('reactForms'));
 
-// defaultProps::::::::
+//defaultProps::::::::
 // can be defined as a property on the component class itself, to set the default props for the class. 
 //This is used for undefined props, but not for null props.
 ReactForms.defaultProps = {
