@@ -6,12 +6,16 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-	action.type = FETCH_POSTS;
 	switch (action.type) {
 		case FETCH_POSTS:
 			return {
 				state,/*...initialState*/
-				ietms: action.payload
+				items: action.payload
+			};
+		case NEW_POST:
+			return {
+				state,/*...initialState*/
+				item : action.payload
 			};
 		default:
 			return state;
