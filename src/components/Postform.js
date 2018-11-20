@@ -1,4 +1,7 @@
 import React, { Component} from 'react';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {createPost} from '../actions/postActions';
 
 class PostForm extends Component {
     constructor(props) {
@@ -23,19 +26,24 @@ class PostForm extends Component {
     onSubmit(event) {
     	event.preventDefault();
     	const post = {
-    		title: this.state.title,
-    		body: this.state.body
-    	}
-    	/*POST request should have method, header and stringify body*/
-    	fetch('https://jsonplaceholder.typicode.com/posts', {
-    		method: 'POST',
-    		headers: {
-    			'content-Type': 'application/json'
-    		},
-    		body: JSON.stringify(post)
-    	})
-    	.then(res => res.json())/*converting stringify data to JSON*/
-    	.then(data => console.log(data));
+	      title: this.state.title,
+	      body: this.state.body
+	    };
+    	this.props.createPost(post);
+    	// const post = {
+    	// 	title: this.state.title,
+    	// 	body: this.state.body
+    	// }
+    	// /*POST request should have method, header and stringify body*/
+    	// fetch('https://jsonplaceholder.typicode.com/posts', {
+    	// 	method: 'POST',
+    	// 	headers: {
+    	// 		'content-Type': 'application/json'
+    	// 	},
+    	// 	body: JSON.stringify(post)
+    	// })
+    	// .then(res => res.json())/*converting stringify data to JSON*/
+    	// .then(data => console.log(data));
 		
     }
 
@@ -55,4 +63,8 @@ class PostForm extends Component {
     }
 }
 
-export default PostForm;
+PostForm.propTypes = {
+	createPost: propTypes.func.isRequired
+};
+
+export default connect(null, { createPost })(PostForm);

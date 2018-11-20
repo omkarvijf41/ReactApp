@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import {connect} from 'react-redux'; /*connect will connectS the components redux store 
+import { connect } from 'react-redux'; /*connect will connectS the components redux store 
 provided by provider*/
-import {fetchPosts} from '../actions/postActions';
+import { fetchPosts } from '../actions/postActions';
 
 class Posts extends Component {
-	componentWillMount() {
-		//this.omkar();
+	componentDidMount() {
 		this.props.fetchPosts();
-		
 	}
-   		// async omkar () {
-   		// 	await this.props.fetchPosts();
-   		// }
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.newPost) {
+			this.props.posts.unshift(nextProps.newPost);
+			//this.render();
+		}
+	}
+ 
     // constructor(props) {
     //     super(props);
     //     this.state = {
@@ -54,11 +57,13 @@ class Posts extends Component {
 
 Posts.propTypes = {
 	fetchPosts: propTypes.func.isRequired,
-	posts: propTypes.array.isRequired
+	posts: propTypes.array.isRequired,
+	newPost: propTypes.object
 };
 
 const mapStateToProps = state => ({
-	posts: state.posts.items
+	posts: state.posts.items,
+	newPost: state.posts.item
 });
 
 export default connect(mapStateToProps, { fetchPosts })(Posts); 
